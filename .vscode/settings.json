@@ -1,5 +1,8 @@
 {
     "cSpell.words": [
+        "egui",
+        "Inspectable",
         "vsync"
-    ]
+    ],
+    "rust-analyzer.showUnlinkedFileNotification": false
 }

@@ -2,17 +2,11 @@ use bevy::prelude::*;
 
 use crate::TILE_SIZE;
 
+// components
 #[derive(Resource)]
 pub struct AsciiSheet(pub Handle<TextureAtlas>);
 
-pub struct AsciiPlugin;
-
-impl Plugin for AsciiPlugin {
-    fn build(&self, app: &mut App) {
-        app.add_startup_system(load_ascii);
-    }
-}
-
+// systems
 pub fn spawn_ascii_sprite(
     commands: &mut Commands,
     ascii: &AsciiSheet,
@@ -39,7 +33,6 @@ pub fn spawn_ascii_sprite(
         .id()
 }
 
-
 fn load_ascii(
     // Spawns assets, textures, etc
     mut commands: Commands,
@@ -60,4 +53,13 @@ fn load_ascii(
     let texture_atlas_handle = texture_atlases.add(texture_atlas);
 
     commands.insert_resource(AsciiSheet(texture_atlas_handle));
+}
+
+// plugins
+pub struct AsciiPlugin;
+
+impl Plugin for AsciiPlugin {
+    fn build(&self, app: &mut App) {
+        app.add_startup_system(load_ascii.in_base_set(StartupSet::PreStartup));
+    }
 }

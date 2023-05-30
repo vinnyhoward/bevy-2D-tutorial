@@ -1,16 +1,17 @@
 use bevy::{
     diagnostic::{FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin},
     prelude::*,
+    render::camera::ScalingMode,
     window::PresentMode,
-    render::camera::ScalingMode
 };
 
-mod player;
 mod ascii;
+mod player;
+mod debug;
 
-
-use player::PlayerPlugin;
 use ascii::AsciiPlugin;
+use player::PlayerPlugin;
+use debug::DebugPlugin;
 
 pub const CLEAR: Color = Color::rgb(0.1, 0.1, 0.1);
 pub const RESOLUTION: f32 = 16.0 / 9.0;
@@ -39,20 +40,10 @@ fn main() {
         .add_startup_system(spawn_camera)
         .add_plugin(PlayerPlugin)
         .add_plugin(AsciiPlugin)
+        .add_plugin(DebugPlugin)
         .add_plugin(LogDiagnosticsPlugin::default())
         .add_plugin(FrameTimeDiagnosticsPlugin)
         .run();
-}
-
-#[derive(Component, Debug, Default)]
-struct Player {
-    name: String,
-}
-
-impl Player {
-    pub fn new(player_name: String) -> Self {
-        Self { name: player_name }
-    }
 }
 
 fn spawn_camera(mut commands: Commands) {
