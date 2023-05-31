@@ -1,7 +1,9 @@
 {
     "cSpell.words": [
+        "aabb",
         "egui",
         "Inspectable",
+        "tilemap",
         "vsync"
     ],
     "rust-analyzer.showUnlinkedFileNotification": false

@@ -6,12 +6,14 @@ use bevy::{
 };
 
 mod ascii;
-mod player;
 mod debug;
+mod player;
+mod tilemap;
 
 use ascii::AsciiPlugin;
-use player::PlayerPlugin;
 use debug::DebugPlugin;
+use player::PlayerPlugin;
+use tilemap::TileMapPlugin;
 
 pub const CLEAR: Color = Color::rgb(0.1, 0.1, 0.1);
 pub const RESOLUTION: f32 = 16.0 / 9.0;
@@ -43,6 +45,7 @@ fn main() {
         .add_plugin(DebugPlugin)
         .add_plugin(LogDiagnosticsPlugin::default())
         .add_plugin(FrameTimeDiagnosticsPlugin)
+        .add_plugin(TileMapPlugin)
         .run();
 }
 
